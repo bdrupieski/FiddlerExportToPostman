@@ -47,7 +47,7 @@ namespace ExportSessionsToPostmanCollection
                 if (dictOptions?.ContainsKey(filenameKey) == true)
                     filename = (string)dictOptions[filenameKey];
                 else
-                    filename = Utilities.ObtainSaveFilename($"Export As {sExportFormat}", "JSON Files (*.json)|*.json");
+                    filename = Utilities.ObtainSaveFilename($"Export As {sExportFormat}", "JSON Files (*.postman_collection.json)|*.postman_collection.json");
 
                 if (string.IsNullOrEmpty(filename))
                     return false;
