@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fiddler">
-      <HintPath>..\..\..\Users\bdrupieski\AppData\Local\Programs\Fiddler\Fiddler.exe</HintPath>
+      <HintPath>..\packages\Fiddler.exe</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -58,7 +58,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetPath)" "%25userprofile%25\My Documents\Fiddler2\ImportExport\$(TargetFilename)"
-copy "Newtonsoft.Json.dll" "%25userprofile%25\My Documents\Fiddler2\ImportExport\Newtonsoft.Json.dll"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetPath)" "%25userprofile%25\AppData\Local\Programs\Fiddler\ImportExport\$(TargetFilename)"
+copy "Newtonsoft.Json.dll" "%25userprofile%25\AppData\Local\Programs\Fiddler\ImportExport\Newtonsoft.Json.dll"</PostBuildEvent>
   </PropertyGroup>
 </Project>

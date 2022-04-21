@@ -20,7 +20,7 @@ namespace ExportSessionsToPostmanCollection
     {
         public string Name { get; set; }
         public PostmanRequest Request { get; set; }
-        public PostmanResponse Response { get; set; }
+        public List<PostmanResponse> Response { get; set; }
     }
 
     public class PostmanRequest
@@ -45,8 +45,17 @@ namespace ExportSessionsToPostmanCollection
     {
         public string Mode { get; set; }
         public string Raw { get; set; }
+        public PostmanRequestOptions Options { get; set; }
     }
+    public class PostmanRequestOptions
+    {
+        public PostmanRequestOptionsRow Row { get; set; }
 
+    }
+    public class PostmanRequestOptionsRow
+    {
+        public string Language { get; set; }
+    }
     public class PostmanRequestAuth
     {
         public string Type { get; set; }
@@ -62,6 +71,7 @@ namespace ExportSessionsToPostmanCollection
         public List<PostmanListItem> Header { get; set; }
         public List<PostmanListItem> Cookie { get; set; }
         public string Body { get; set; }
+        public string _postman_previewlanguage { get; set; }
     }
 
     public class PostmanListItem

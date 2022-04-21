@@ -1,3 +1,7 @@
+# 20220421
+
+修复 reponse，并将类型改为 json。
+
 # FiddlerExportToPostman
 
 This is a Fiddler extension for exporting sessions into a format that can be imported by Postman.
