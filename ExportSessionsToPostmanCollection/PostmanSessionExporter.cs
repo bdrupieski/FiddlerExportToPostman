@@ -54,7 +54,7 @@ namespace ExportSessionsToPostmanCollection
 
                 if (oSessions.Length > 100)
                 {
-                    var confirmResult = MessageBox.Show($"You're about to export {oSessions.Length} sessions. That's a lot. Are you sure you want to do that?", 
+                    var confirmResult = MessageBox.Show($"You're about to export {oSessions.Length} sessions. That's a lot. Are you sure you want to do that?",
                         "Just Checking", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                     if (confirmResult != DialogResult.Yes)
@@ -86,20 +86,33 @@ namespace ExportSessionsToPostmanCollection
                             {
                                 Mode = "raw",
                                 Raw = session.GetRequestBodyAsString(),
+                                Options = new PostmanRequestOptions
+                                {
+                                    Row = new PostmanRequestOptionsRow
+                                    {
+                                        Language = "json",
+                                    }
+                                }
                             },
                         },
-                        Response = new PostmanResponse
-                        {
-                            Code = session.responseCode,
-                            Name = session.PathAndQuery,
-                            Body = session.GetResponseBodyAsString(),
-                            Status = session.ResponseHeaders.StatusDescription,
-                            Header = new List<PostmanListItem>(session.ResponseHeaders.Count() + 1),
+                        Response = new List<PostmanResponse>(){
+                            new PostmanResponse
+                            {
+                                Code = session.responseCode,
+                                Name = session.PathAndQuery,
+                                Body = session.GetResponseBodyAsString(),
+                                Status = session.ResponseHeaders.StatusDescription,
+                                Header = new List<PostmanListItem>(session.ResponseHeaders.Count() + 1),
+                                _postman_previewlanguage = "json",
+                            }
                         },
                     };
 
+                    postmanItem.Response[0].OriginalRequest = postmanItem.Request;
+
                     foreach (var requestHeader in session.RequestHeaders)
                     {
+                        if (requestHeader.Name == "Host") continue;
                         postmanItem.Request.Header.Add(new PostmanListItem
                         {
                             Type = "text",
@@ -110,7 +123,7 @@ namespace ExportSessionsToPostmanCollection
 
                     foreach (var responseHeader in session.ResponseHeaders)
                     {
-                        postmanItem.Response.Header.Add(new PostmanListItem
+                        postmanItem.Response[0].Header.Add(new PostmanListItem
                         {
                             Key = responseHeader.Name,
                             Value = responseHeader.Value
